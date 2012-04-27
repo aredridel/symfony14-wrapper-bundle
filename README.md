@@ -1,10 +1,10 @@
-# IngewikkeldWrapperBundle
+# symfony14-wrapper-bundle
 
 ## What is it?
 
-IngewikkeldWrapperBundle is a simple Symfony2 bundle to wrap your old legacy symfony 1 application. This allows you to gradually refactor your old symfony 1 code with spankin' new Symfony2 code.
+symfony14-wrapper-bundle is a simple Symfony2 bundle (based on IngewikkeldWrapperBundle) to wrap an old legacy Symfony 1.4 application. This allows you to gradually refactor your old Symfony 1.4 code with spankin' new Symfony2 code.
 
-IngewikkeldWrapperBundle works with a fallback route. All routes that are not caught by your Symfony2 code are routed into the IngewikkeldWrapperBundle, which in turn bootstraps your symfony 1 project.
+The bundle works with a fallback route: all routes that are not caught by your Symfony2 code are routed into the bundle, which in turn bootstraps your Symfony 1.4 project.
 
 **Note**: While this bundle can be very useful, it is not recommended to use it for too long. You *are* running two different frameworks for each request that goes through this bundle, meaning there's two frameworks adding an overhead to each request. If you have the possibility, look into caching the output of your legacy code in Symfony2.
 
@@ -22,7 +22,7 @@ Installation is done in just a couple of steps:
 
 ### 1. Download the bundle
 
-Make sure the bundle is being placed in vendor/bundles/Ingewikkeld/IngewikkeldWrapperBundle. You can do this by using the vendors script, using submodules or downloading the zip file.
+Make sure the bundle is being placed in vendor/bundles/aredridel/IngewikkeldWrapperBundle. You can do this by using the vendors script, using submodules or downloading the zip file.
 
 #### vendors script
 Open the *deps* file in your Symfony2 project, and add the following:
@@ -63,7 +63,7 @@ Enable the bundle in the AppKernel (*app/AppKernel.php*). In the registerBundles
         );
 ### 4. Configure your legacy project
 
-Put your legacy project in your *app/* directory. For my first project, I put my whole project into the *app/legacy/* directory. Now, add some configuration values to *app/config/config.yml* to set up the WrapperBundle to serve pages from your legacy symfony 1 project:
+Put your legacy project in your *app/* directory. For my first project, I put my whole project into the *app/legacy/* directory. Now, add some configuration values to *app/config/config.yml* to set up the WrapperBundle to serve pages from your legacy Symfony 1.4 project:
 
     parameters:
         wrapper_legacypath: legacy # directory inside app/ where your project is located
@@ -79,8 +79,8 @@ All files that need to be available in the document root need to be copied there
 
 At the bottom of your *app/config/routing.yml* file, add the following:
 
-IngewikkeldWrapperBundle:
-    resource: "@IngewikkeldWrapperBundle/Controller/"
+Symfony14WrapperBundle:
+    resource: "@Symfony14WrapperBundle/Controller/"
     type:     annotation
     prefix:   /
 
@@ -92,13 +92,11 @@ Now, start refactoring and porting your legacy project into Symfony2 code.
 
 ## Current state of the project
 
-The current state of the project is: **Proof of Concept**
-
-It is working for me right now for one of my legacy projects using this approach. This is with a symfony 1.0 project. It might not (yet) work for you. I greatly welcome pull requests to add features or ensure compatibility with other versions of symfony 1. If you've confirmed this bundle to work with another version of symfony 1, please also let me know!
+The current state of the project is: **Work In Progress**
 
 ## Known issues / TODO
 
 1. Assets are not automatically loaded but have to be copied over to the Symfony2 documentroot
-2. Compatibility is so far only confirmed with symfony 1.0
-3. It is currently only possible to load one symfony 1-app
+2. There is no compatibility with Symfony 1.0.
+3. It is currently only possible to wrap one legacy app.
 4. No session sharing at the moment

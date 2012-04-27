@@ -1,6 +1,6 @@
 <?php
 
-namespace Ingewikkeld\WrapperBundle\Controller;
+namespace Aredridel\Symfony14WrapperBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,7 +20,7 @@ class WrapperController extends Controller
         define('SF_ENVIRONMENT', $this->container->getParameter('wrapper_env'));
         define('SF_DEBUG',       $this->container->getParameter('wrapper_debug'));
 
-        require_once(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php');
+        require_once(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'ProjectConfiguration.php');
 
         return new \Symfony\Component\HttpFoundation\Response(\sfContext::getInstance()->getController()->dispatch());
 
